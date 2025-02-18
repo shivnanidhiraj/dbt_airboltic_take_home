@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Dimension table for customer data, flat with group attributes."
+    columns:
+      - name: customer_key
+        description: "Surrogate primary key for the customer dimension."
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Original customer ID from the source system."
+        tests:
+          - not_null
+      - name: customer_name
+        description: "Customer name"
+      - name: customer_group_type
+        description: "Type of group the customer belongs to (e.g. organization, company)."
+
+  - name: dim_aeroplane
+    description: "Dimension table for airplane details, merged raw plane data and JSON-based specifications"
+    columns:
+      - name: airplane_key
+        description: "Surrogate primary key for the aeroplane dimension."
+        tests:
+          - not_null
+          - unique
+      - name: airplane_id
+        description: "Original airplane ID from the source system."
+      - name: airplanemodel
+        description: "Model of the airplane (e.g., '737-800', 'A320neo')."
+      - name: manufacturer
+        description: "Manufacturer name (e.g. Boeing, Airbus)."
+      - name: max_seats
+        description: "Maximum seat capacity (parsed from JSON)."
+
+  - name: dim_trip
+    description: "Dimension table for trip records (origin, destination, timestamps)."
+    columns:
+      - name: trip_key
+        description: "Surrogate primary key for the trip dimension."
+        tests:
+          - not_null
+          - unique
+      - name: trip_id
+        description: "Original Trip ID from the source system."
+      - name: origincity
+        description: "Departure city."
+      - name: destinationcity
+        description: "Arrival city."
+      - name: trip_start_ts
+        description: "Departure timestamp."
+      - name: trip_end_ts
+        description: "Arrival timestamp."
+      - name: flight_duration_hours
+        description: "Calculated flight duration (in hours)."
+
+  - name: fact_orders
+    description: "Fact table storing seat bookings (orders) placed by customers for a given trip."
+    columns:
+      - name: fact_order_key
+        description: "Surrogate primary key for the order fact."
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Order ID from the source system."
+        tests:
+          - not_null
+      - name: customer_key
+        description: "Foreign key linking to dim_customers."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_key
+      - name: trip_key
+        description: "Foreign key linking to dim_trip."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_trip')
+              field: trip_key
+      - name: price
+        description: "Ticket price for the booking."
+      - name: seatno
+        description: "Seat number (degenerate dimension)."
+      - name: status
+        description: "Status of the order (e.g. booked, canceled, finished)."

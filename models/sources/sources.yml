@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: postgres
+    database: postgres
+    schema: public
+    tables:
+      - name: customers
+        description: Raw table for customer data for airboltic service
+      - name: customer_group
+        description: Raw table for group and categories of airboltic customer like organization, company etc
+      - name: aeroplane
+        description: Base aeroplane table, referencing model and manufacturer
+      - name: trip
+        description: Raw table for trip related data
+      - name: order
+        description: Raw table for orders data placed by customer for a booking
