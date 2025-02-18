@@ -44,14 +44,12 @@ Please refer to Google doc for details.
     └── validate_flight_duration.sql
 ```
 
-## Project Structure
-
-Prerequisites
+## Prerequisites
  - Python 3.9+ installed
  - dbt Core installed along with the appropriate adapter (e.g., dbt-postgres if using Postgres)
  - Git installed
 
-Steps to Get Started
+## Steps to Get Started
 1. Clone the repo
     ```
    git clone https://github.com/yourusername/dbt_airboltic_take_home.git
