@@ -109,6 +109,6 @@ After the initial setup, you can run the following commands as you continue deve
 ------------------------------------------------------------------------------------------------------
 
 ## Testing & Documentation
-Schema Tests: Defined in the _schema.yml_ file to ensure columns meet expectations (e.g., not_null, unique, relationships).
-Data Tests: Custom tests in the _tests/_ folder (e.g., test_missing_fk.sql, test_no_duplicate_orders.sql, validate_flight_duration.sql).
-Documentation: Auto-generated with dbt docs generate and served via dbt docs serve.
+- **Schema Tests**: Defined in the _schema.yml_ file to ensure columns meet expectations (e.g., not_null, unique, relationships).
+- **Data Tests**: Custom tests in the _tests/_ folder (e.g., test_missing_fk.sql, test_no_duplicate_orders.sql, validate_flight_duration.sql).
+- **Documentation**: Auto-generated with dbt docs generate and served via dbt docs serve.
